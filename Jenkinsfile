@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Deliver for development') {
             when {
-                branch 'development'
+                branch 'develop'
             }
             steps {
                 sh 'chmod +x ./jenkins/scripts'
@@ -32,6 +32,9 @@ pipeline {
             }
         }
         stage('Deploy for production') {
+            when {
+                branch 'master'
+            }            
             steps {
                 sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/deliver.sh'
