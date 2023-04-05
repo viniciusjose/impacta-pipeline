@@ -21,9 +21,6 @@ pipeline {
             }      
         }
         stage('Deliver for development') {
-            when {
-                branch 'develop'
-            }
             steps {
                 sh 'chmod +x ./jenkins/scripts'
                 sh './jenkins/scripts/deliver.sh'
@@ -31,10 +28,7 @@ pipeline {
                 sh './jenkins/scripts/kill.sh'
             }
         }
-        stage('Deploy for production') {
-            when {
-                branch 'master'
-            }            
+        stage('Deploy for production') {       
             steps {
                 sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/deliver.sh'
